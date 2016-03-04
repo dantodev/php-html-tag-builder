@@ -1,0 +1,10 @@
+{
+  "name": "dtkahl/php-html-tag-builder",
+  "license": "MIT",
+  "require": {},
+  "autoload": {
+    "psr-4": {
+      "Dtkahl\\HtmlTagBuilder\\": "src/"
+    }
+  }
+}
