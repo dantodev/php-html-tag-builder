@@ -1,2 +1,2 @@
-# php-html-tag-builder
-HTML Tag Builder for PHP
+# PHP HTML tag builder (PHP >= 7.0.0)
+HTML tag builder for PHP.
