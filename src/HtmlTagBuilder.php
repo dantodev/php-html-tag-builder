@@ -1,11 +1,13 @@
 <?php namespace Dtkahl\HtmlTagBuilder;
 
+use Dtkahl\PropertyHolder\PropertyHolder;
+
 class HtmlTagBuilder
 {
   private $_type        = "";
-  private $_attributes  = [];
   private $_text        = "";
-  private $_options     = [];
+  public $attributes    = [];
+  public $options       = [];
 
   /**
    * HtmlTag constructor.
@@ -17,11 +19,11 @@ class HtmlTagBuilder
   public function __construct(string $type, array $attributes = [], string $text = "", array $options = [])
   {
     $this->_type        = $type;
-    $this->_attributes  = $attributes;
     $this->_text        = $text;
-    $this->_options     = array_merge([
+    $this->attributes  = new PropertyHolder($attributes);
+    $this->options     = new PropertyHolder(array_merge([
       'escape_text'  => true
-    ], $options);
+    ], $options));
   }
 
   /**
@@ -37,10 +39,10 @@ class HtmlTagBuilder
    */
   public function render()
   {
-    $text       = $this->_options['escape_text'] ? htmlentities($this->_text) : $this->_text;
+    $text       = $this->options->has('escape_text') ? htmlentities($this->_text) : $this->_text;
     $attributes = "";
 
-    foreach ($this->_attributes as $name => $value) {
+    foreach ($this->attributes->all() as $name => $value) {
       $attributes .= sprintf(' %s="%s"', $name, $value);
     }
 
@@ -49,27 +51,6 @@ class HtmlTagBuilder
     } else {
       return sprintf('<%s%s>%s</%s>', $this->_type, $attributes, $text, $this->_type);
     }
-  }
-
-  /**
-   * @param $key
-   * @param $value
-   * @return $this
-   */
-  public function setAttribute($key, $value)
-  {
-    $this->_attributes[$key] = $value;
-    return $this;
-  }
-
-  /**
-   * @param $key
-   * @param null $default
-   * @return null
-   */
-  public function getAttribute($key, $default = null)
-  {
-    return array_key_exists($key, $this->_attributes) ? $this->_attributes[$key] : $default;
   }
 
   /**
@@ -88,27 +69,6 @@ class HtmlTagBuilder
   public function getText()
   {
     return $this->_text;
-  }
-
-  /**
-   * @param $key
-   * @param $value
-   * @return $this
-   */
-  public function setOption($key, $value)
-  {
-    $this->_options[$key] = $value;
-    return $this;
-  }
-
-  /**
-   * @param $key
-   * @param null $default
-   * @return null
-   */
-  public function getOption($key, $default = null)
-  {
-    return array_key_exists($key, $this->_options) ? $this->_options[$key] : $default;
   }
 
 }
