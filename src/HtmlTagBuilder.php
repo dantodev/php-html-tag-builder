@@ -46,7 +46,7 @@ class HtmlTagBuilder
       $attributes .= sprintf(' %s="%s"', $name, $value);
     }
 
-    if (in_array($this->_type, ['meta', 'img', 'input', 'br', 'hr'])) {
+    if (in_array($this->_type, ['meta', 'img', 'input', 'br', 'hr', 'link'])) {
       return sprintf('<%s%s>', $this->_type, $attributes);
     } else {
       return sprintf('<%s%s>%s</%s>', $this->_type, $attributes, $text, $this->_type);
