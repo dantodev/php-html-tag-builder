@@ -1,6 +1,6 @@
 <?php namespace Dtkahl\HtmlTagBuilder;
 
-use Dtkahl\PropertyHolder\PropertyHolder;
+use Dtkahl\ArrayTools\Map;
 
 class HtmlTagBuilder
 {
@@ -20,8 +20,8 @@ class HtmlTagBuilder
   {
     $this->_type        = $type;
     $this->_text        = $text;
-    $this->attributes  = new PropertyHolder($attributes);
-    $this->options     = new PropertyHolder(array_merge([
+    $this->attributes  = new Map($attributes);
+    $this->options     = new Map(array_merge([
       'escape_text'  => true
     ], $options));
   }
