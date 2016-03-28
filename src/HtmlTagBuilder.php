@@ -16,10 +16,10 @@ class HtmlTagBuilder
    * @param string $text
    * @param array $options
    */
-  public function __construct(string $type, array $attributes = [], string $text = "", array $options = [])
+  public function __construct($type, array $attributes = [], $text = "", array $options = [])
   {
-    $this->_type        = $type;
-    $this->_text        = $text;
+    $this->_type       = (string) $type;
+    $this->_text       = (string) $text;
     $this->attributes  = new Map($attributes);
     $this->options     = new Map(array_merge([
       'escape_text'  => true
@@ -42,7 +42,7 @@ class HtmlTagBuilder
     $text       = $this->options->has('escape_text') ? htmlentities($this->_text) : $this->_text;
     $attributes = "";
 
-    foreach ($this->attributes->all() as $name => $value) {
+    foreach ($this->attributes->toArray() as $name => $value) {
       $attributes .= sprintf(' %s="%s"', $name, $value);
     }
 
