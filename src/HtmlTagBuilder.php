@@ -1,29 +1,28 @@
 <?php namespace Dtkahl\HtmlTagBuilder;
 
 use Dtkahl\ArrayTools\Map;
+use phpDocumentor\Reflection\DocBlock\Type\Collection;
 
 class HtmlTagBuilder
 {
   private $_type        = "";
   private $_text        = "";
-  public $attributes    = [];
-  public $options       = [];
+  public $attributes;
+  public $options;
 
   /**
    * HtmlTag constructor.
    * @param string $type
-   * @param array $attributes
+   * @param Collection|array $attributes
    * @param string $text
    * @param array $options
    */
-  public function __construct($type, array $attributes = [], $text = "", array $options = [])
+  public function __construct($type, $attributes = [], $text = "", array $options = [])
   {
     $this->_type       = (string) $type;
     $this->_text       = (string) $text;
-    $this->attributes  = new Map($attributes);
-    $this->options     = new Map(array_merge([
-      'escape_text'  => true
-    ], $options));
+    $this->attributes  = $attributes instanceof Collection ? $attributes : new Map($attributes);
+    $this->options     = $options instanceof Collection ? $options : new Map($options);
   }
 
   /**
@@ -39,7 +38,7 @@ class HtmlTagBuilder
    */
   public function render()
   {
-    $text       = $this->options->has('escape_text') ? htmlentities($this->_text) : $this->_text;
+    $text       = $this->options->get('escape_text', true) ? htmlentities($this->_text) : $this->_text;
     $attributes = "";
 
     foreach ($this->attributes->toArray() as $name => $value) {
