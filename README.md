@@ -5,4 +5,24 @@
 # PHP HTML tag builder
 HTML tag builder for PHP.
 
-_docu TBA_
+#### Dependencies
+
+* `PHP >= 5.6.0`
+
+
+#### Installation
+
+Install with [Composer](http://getcomposer.org):
+```
+composer require dtkahl/php-html-tag-builder
+```
+
+### Usage
+
+```
+new HtmlTagBuilder("div", ['class' => 'foo']);
+```
+
+### Methods
+
+_TBA_
