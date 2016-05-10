@@ -1,7 +1,6 @@
 <?php namespace Dtkahl\HtmlTagBuilder;
 
 use Dtkahl\ArrayTools\Map;
-use phpDocumentor\Reflection\DocBlock\Type\Collection;
 
 class HtmlTagBuilder
 {
@@ -13,7 +12,7 @@ class HtmlTagBuilder
   /**
    * HtmlTag constructor.
    * @param string $type
-   * @param Collection|array $attributes
+   * @param Map|array $attributes
    * @param string $text
    * @param array $options
    */
@@ -21,8 +20,8 @@ class HtmlTagBuilder
   {
     $this->_type       = (string) $type;
     $this->_text       = (string) $text;
-    $this->attributes  = $attributes instanceof Collection ? $attributes : new Map($attributes);
-    $this->options     = $options instanceof Collection ? $options : new Map($options);
+    $this->attributes  = $attributes instanceof Map ? $attributes : new Map($attributes);
+    $this->options     = $options instanceof Map ? $options : new Map($options);
   }
 
   /**
