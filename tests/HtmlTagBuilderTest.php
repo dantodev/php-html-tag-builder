@@ -5,8 +5,8 @@ class HtmlTagBuilderTest extends \PHPUnit_Framework_TestCase
 
     public function testConstructor()
     {
-        $tag = new HtmlTagBuilder('div', ['class' => 'foo'], 'bar');
-        $this->assertEquals('<div class="foo">bar</div>', $tag->render());
+        $tag = new HtmlTagBuilder('div', ['class' => 'foo', 'data-test'], 'bar');
+        $this->assertEquals('<div class="foo" data-test>bar</div>', $tag->render());
     }
 
     public function testBuild()

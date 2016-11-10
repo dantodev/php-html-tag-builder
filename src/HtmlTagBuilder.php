@@ -41,7 +41,11 @@ class HtmlTagBuilder
         $attributes = "";
 
         foreach ($this->attributes->toArray() as $name => $value) {
-            $attributes .= sprintf(' %s="%s"', $name, $value);
+            if (is_numeric($name)) {
+                $attributes .= " " . $value;
+            } else {
+                $attributes .= sprintf(' %s="%s"', $name, $value);
+            }
         }
 
         if (in_array($this->_type, ['meta', 'img', 'input', 'br', 'hr', 'link'])) {
